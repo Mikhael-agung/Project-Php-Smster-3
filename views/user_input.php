@@ -31,7 +31,7 @@
                     <!-- Role Deskripsi -->
                     <div class="mb-4">
                         <label for="role_description" class="block text-gray-700 text-sm font-bold mb-2">Password:</label>
-                        <textarea id="role_description" name="role_description" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Masukkan Deskripsi Role" rows="3" required></textarea>
+                        <textarea id="role_description" type="password" name="role_description" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Masukkan password" rows="3" required></textarea>
                     </div>
 
                     <!-- Role Status -->

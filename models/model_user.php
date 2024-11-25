@@ -32,9 +32,19 @@ class modelUser {
     private function initializeDefaultUsers() {
         $obj_role1 = new \Role(1, "Admin", "Administration", 1);
         $obj_role2 = new \Role(2, "Kasir", "Kasir", 1);
+        //data dummy
         $this->addUser('Acel@gmail.com', '666', $obj_role1);
         $this->addUser('Tata@gmail.com', '666', $obj_role1);
         $this->addUser('Orel@gmail.com', '666', $obj_role2);
+    }
+
+    public function getUserById($user_id) {
+        foreach($this->users as $user) {
+            if ($user->user_id == $user_id) {
+                return $user;
+            }
+        }
+        return null;
     }
 }
 
@@ -47,4 +57,8 @@ foreach ($users as $user) {
     echo "Password: ".$user->password."<br/>";
     echo "Role Name: ".$user->role->role_name."<br/>";
 }
+
+echo "-----------------------------"."<br/>";
+echo "Testing Search User by ID"."<br/>";
+
 ?>
