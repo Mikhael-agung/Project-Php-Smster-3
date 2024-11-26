@@ -1,6 +1,6 @@
 <?php
-require_once '../nodes/node_user.php';
-require_once '../nodes/node_role.php';
+require_once 'nodes/node_user.php';
+require_once 'nodes/node_role.php';
 
 class modelUser {
     private $users = [];
@@ -46,19 +46,65 @@ class modelUser {
         }
         return null;
     }
+
+    public function deleteUser($user){
+        if($user != null){
+            $key = array_search($user, $this->users);
+            unset($this->users[$key]);
+            $this->users = array_values($this->users);
+            $this->saveToSession();
+            return true;
+        }
+        return false;
+    }
+
+    public function updateUser($user_id, $uname, $pass, $role,) {
+        $userlokal = $this->getUserById($user_id);
+        if($userlokal != null){
+            $userlokal->username = $uname;
+            $userlokal->password = $pass;
+            $userlokal->role = $role;
+            $this->saveToSession();
+            return true;
+        }
+        return false;    
+    }
 }
+
+// session_start();
 
 // Testing Input dan Output
-$obj_user = new modelUser();
-$users = $obj_user->getUsers();
-// print_r($users);
-foreach ($users as $user) {
-    echo "Username: ".$user->username."<br/>";
-    echo "Password: ".$user->password."<br/>";
-    echo "Role Name: ".$user->role->role_name."<br/>";
-}
+// $obj_user = new modelUser();
+// $users = $obj_user->getUsers();
+// // print_r($users);
+// foreach ($users as $user) {
+//     echo "Username: ".$user->username."<br/>";
+//     echo "Password: ".$user->password."<br/>";
+//     echo "Role Name: ".$user->role->role_name."<br/>";
+// }
 
-echo "-----------------------------"."<br/>";
-echo "Testing Search User by ID"."<br/>";
+// echo "-----------------------------"."<br/>";
+// echo "Testing Search User by ID"."<br/>";
+// $userlokal = $obj_user->getUserById(1);
+// print_r($userlokal);
+
+// echo "Testing Delete User by ID"."<br/>";
+// $userlokal = $obj_user->getUserById(3);
+// $obj_user->deleteUser($userlokal);
+// foreach ($users as $user) {
+//     echo "Username: ".$user->username."<br/>";
+//     echo "Password: ".$user->password."<br/>";
+//     echo "Role Name: ".$user->role->role_name."<br/>";
+// }
+
+// echo "Testing Delete User by ID"."<br/>";
+// $userlokal = $obj_user->getUserById(2);
+// $obj_role1 = new \Role(1, "Admin", "Administration", 1);
+// $obj_user->updateUser(2, "dicky@gmail.com", "123", $obj_role1);
+// foreach ($users as $user) {
+//     echo "Username: ".$user->username."<br/>";
+//     echo "Password: ".$user->password."<br/>";
+//     echo "Role Name: ".$user->role->role_name."<br/>";
+// }
 
 ?>
